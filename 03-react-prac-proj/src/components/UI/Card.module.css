@@ -1,5 +1,6 @@
 .form-wrapper{
-  color: snow;
+  color: black;
+  background: snow;
   box-shadow: 0 2px 8px lightslategray;
   display: flex;
 };

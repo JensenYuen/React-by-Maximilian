@@ -1,13 +1,15 @@
 import React from "react";
 
 import Card from "../UI/Card";
+import Button from "../UI/Button";
 import classes from "./AddUser.module.css"
 
 const AddUser = (props) => {
   const addUserHandler = (event) => {
     event.preventDefault();
-    console.log(event);
-    const userInput = '';
+    const userInput = event.target[0].value;
+    const userAge = event.target[1].value;
+    console.log(userInput, userAge);
   };
 
   return (
@@ -21,7 +23,7 @@ const AddUser = (props) => {
           <label htmlFor="age">Age (Years)</label>
           <input id="age"type="number" />
         </div>
-        <button type="submit">Add User</button>
+        <Button type="submit">Add User</Button>
       </form>
     </Card>
   );

@@ -4,7 +4,7 @@ import classes from "./Card.module.css"
 
 const Card = (props) => {
   return(
-    <div className={classes['form-wrapper']}>
+    <div className={`${props.className} ${classes['form-wrapper']}`}>
       {props.children}
     </div>
   );
