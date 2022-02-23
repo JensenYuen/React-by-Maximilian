@@ -10,8 +10,6 @@ const AddUser = (props) => {
 
 
   const addUserHandler = (event) => {
-    // let usernameField = event.target[0].value;
-    // let ageField = event.target[1].value;
     event.preventDefault();
     if (enteredUsername.trim().length === 0 || enteredAge.trim().length) {
       // console.log("missing input");
