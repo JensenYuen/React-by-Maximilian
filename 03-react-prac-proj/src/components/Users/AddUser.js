@@ -7,24 +7,24 @@ import classes from "./AddUser.module.css"
 const AddUser = (props) => {
   const [enteredUsername, setEnteredUsername] = useState('');
   const [enteredAge, setEnteredAge] = useState('');
-  console.log(props);
 
   const addUserHandler = (event) => {
     event.preventDefault();
 
-    if (enteredUsername.trim().length === 0 || enteredAge.trim().length) {
-      // console.log("missing input");
+    if (enteredUsername.trim().length === 0 || enteredAge.trim().length === 0) {
+      console.log("missing input");
       return;
     }
     if (+enteredAge < 1 || +enteredAge > 100) {
-      // console.log("entered age is less than 1 or more than 100");
+      console.log("entered age is less than 1 or more than 100");
       return;
     }
 
     const user = {
+      key: Math.random().toString(),
       username: enteredUsername,
       age: +enteredAge
-    }
+    };
     props.onAddNewUser(user);
 
     setEnteredUsername('');
