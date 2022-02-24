@@ -75,7 +75,7 @@ const Login = (props) => {
     dispatchEmail({type: 'USER_INPUT', value: event.target.value});
 
     setFormIsValid(
-      event.target.value.includes('@') && passwordState.isValid
+      emailState.isValid && passwordState.isValid
     );
   };
 
@@ -83,7 +83,7 @@ const Login = (props) => {
     dispatchPassword({type: 'USER_INPUT', value: event.target.value});
 
     setFormIsValid(
-      emailState.isValid && event.target.value.trim().length > 6
+      emailState.isValid && passwordState.isValid
     );
   };
 
