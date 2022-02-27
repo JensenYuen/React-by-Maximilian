@@ -111,7 +111,7 @@ const Login = (props) => {
   const submitHandler = (event) => {
     event.preventDefault();
     if (formIsValid) {
-      authCtx.onLogin(emailState.isValid, passwordState.isValid);
+      authCtx.onLogin(emailState.value, passwordState.value);
     } else if (!emailIsValid) {
       emailInputRef.current.focus();
     } else {
