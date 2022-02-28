@@ -9,7 +9,7 @@ const MealItem = (props) => {
 
   const price = `$${props.price.toFixed(2)}`;
 
-  const addToCartHander = (amount) => {
+  const addToCartHandler = (amount) => {
     cartCtx.addItem({
       id: props.id,
       name: props.name,
@@ -26,7 +26,7 @@ const MealItem = (props) => {
         <div className={classes.price}>{price}</div>
       </div>
       <div>
-        <MealIteamForm onAddToCart={addToCartHander} id={props.id} />
+        <MealIteamForm onAddToCart={addToCartHandler} id={props.id} />
       </div>
     </li>
   );

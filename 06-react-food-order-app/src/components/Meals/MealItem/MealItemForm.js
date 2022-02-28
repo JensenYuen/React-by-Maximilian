@@ -12,17 +12,13 @@ const MealIteamForm = (props) => {
 
     const enteredAmount = amountInputRef.current.value;
     const amount = +enteredAmount;
-
-    if (
-      enteredAmount.trim().length === 0 ||
-      enteredAmount < 1 ||
-      enteredAmount > 5
-    ) {
+    if (enteredAmount.trim().length === 0 || amount < 1 || amount > 5)
+    {
       setAmountIsValid(false);
       return;
+    } else {
+      props.onAddToCart(amount);
     }
-
-    props.onAddToCart(amount);
   };
 
   return (
@@ -31,10 +27,11 @@ const MealIteamForm = (props) => {
         ref={amountInputRef}
         label="Amount"
         input={{
-          id:'amount' + props.id,
+          id:'amount_' + props.id,
           type:'number',
           min:'1',
           max:'5',
+          step: '1',
           defaultValue: '1'
         }}
       />
