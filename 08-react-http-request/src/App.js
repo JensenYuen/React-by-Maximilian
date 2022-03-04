@@ -11,9 +11,17 @@ function App() {
 
   const url = "https://swapi.dev/api/films/";
   const invalidUrl = "https://swapi.dev/api/film/";
-
-  const addMovieHandler = (movie) => {
-    console.log(movie);
+  const database = "firebase database link here";
+  async function addMovieHandler(movie) {
+    const response = await fetch(database, {
+      method: "POST",
+      body: JSON.stringify(movie),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    const data = await response.json();
+    console.log(data);
   }
 
   const getMoviesHandler = useCallback(async() => {
@@ -21,21 +29,23 @@ function App() {
     setError(null);
 
     try {
-      const response = await fetch(url);
+      const response = await fetch(database);
 
       if (!response.ok) {
         throw new Error("Something went wrong!");
       }
       const data = await response.json();
-      const modifiedMoviesDetails = data.results.map((movie) => {
-        return {
-          id: movie.episode_id,
-          title: movie.title,
-          openingText: movie.opening_crawl,
-          releaseDate: movie.release_date,
-        };
-      });
-      setMovieList(modifiedMoviesDetails);
+      const loadedMoives = [];
+      for (const key in data) {
+        loadedMoives.push({
+          id: key,
+          title: data[key].title,
+          openingText: data[key].openingText,
+          releaseDate: data[key].releaseDate
+        })
+      }
+
+      setMovieList(loadedMoives);
     } catch (error) {
       setError(error.message);
     }
