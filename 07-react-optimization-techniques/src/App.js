@@ -14,7 +14,7 @@ function App() {
   return (
     <div className="app">
       <h1>Hi there!</h1>
-      <DemoOutput onShow={showParagraph} />
+      <DemoOutput onShow={false} />
       <Button onClick={ToggleShowParagraph}>Show paragraph</Button>
     </div>
   );
