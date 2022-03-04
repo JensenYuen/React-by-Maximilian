@@ -7,24 +7,20 @@ function App() {
   const [movieList, setMovieList] = useState([]);
   const url = "https://swapi.dev/api/films/";
 
-  const getMoviesHandler = () => {
-    fetch(url)
-    .then((response) => {
-      return response.json();
-    }).then((data) => {
-      const modifiedMoviesDetails = data.results.map((movie) => {
-        return (
-          {
-            id: movie.episode_id,
-            title: movie.title,
-            openingText: movie.opening_crawl,
-            releaseDate: movie.release_date
-          }
-        )
+  async function getMoviesHandler() {
+    const response = await fetch(url);
+    const data = await response.json();
+    const modifiedMoviesDetails = data.results.map((movie) => {
+      return (
+        {
+          id: movie.episode_id,
+          title: movie.title,
+          openingText: movie.opening_crawl,
+          releaseDate: movie.release_date
+        })
       });
-      setMovieList(modifiedMoviesDetails)
-    });
-  }
+    setMovieList(modifiedMoviesDetails)
+  };
 
   return (
     <React.Fragment>
