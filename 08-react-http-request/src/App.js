@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import MoviesList from './components/MoviesList';
 import './App.css';
@@ -11,32 +11,36 @@ function App() {
   const url = "https://swapi.dev/api/films/";
   const invalidUrl = "https://swapi.dev/api/film/";
 
-  async function getMoviesHandler() {
+
+  const getMoviesHandler = useCallback(async() => {
     setIsLoading(true);
     setError(null);
 
     try {
-      const response = await fetch(invalidUrl);
+      const response = await fetch(url);
 
       if (!response.ok) {
-        throw new Error('Something went wrong!');
+        throw new Error("Something went wrong!");
       }
       const data = await response.json();
       const modifiedMoviesDetails = data.results.map((movie) => {
-        return (
-          {
-            id: movie.episode_id,
-            title: movie.title,
-            openingText: movie.opening_crawl,
-            releaseDate: movie.release_date
-          })
-        });
-      setMovieList(modifiedMoviesDetails)
+        return {
+          id: movie.episode_id,
+          title: movie.title,
+          openingText: movie.opening_crawl,
+          releaseDate: movie.release_date,
+        };
+      });
+      setMovieList(modifiedMoviesDetails);
     } catch (error) {
       setError(error.message);
     }
-  setIsLoading(false);
-  };
+    setIsLoading(false);
+  },[]);
+
+  useEffect(() => {
+    getMoviesHandler();
+  },[getMoviesHandler]);
 
   let content = <p>Found no movies</p>;
   if (movieList.length > 0) {
