@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
 import MoviesList from './components/MoviesList';
+import AddMovie from './components/AddMovie'
 import './App.css';
 
 function App() {
@@ -11,6 +12,9 @@ function App() {
   const url = "https://swapi.dev/api/films/";
   const invalidUrl = "https://swapi.dev/api/film/";
 
+  const addMovieHandler = (movie) => {
+    console.log(movie);
+  }
 
   const getMoviesHandler = useCallback(async() => {
     setIsLoading(true);
@@ -55,6 +59,9 @@ function App() {
 
   return (
     <React.Fragment>
+      <section>
+        <AddMovie onAddMovie={addMovieHandler}/>
+      </section>
       <section>
         <button onClick={getMoviesHandler}>Fetch Movies</button>
       </section>
